@@ -21,7 +21,7 @@ import { AuthGuard } from '@app/user/guards/auth.guard';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('users')
+  @Post('users/signup')
   @UsePipes(new ValidationPipe())
   async createUser(
     @Body('user') createUserDto: CreateUserDto, // this is payload
@@ -44,7 +44,7 @@ export class UserController {
   @Get('user')
   @UseGuards(AuthGuard)
   async currentUser(
-    // @Req() request: IExpressRequest, <== можна було лишити так, але ми створили свій декоратор
+    // @Req() request: IExpressRequest, <== можна було лишити так, але ми створили свій декоратор @User
     @User() user: UserEntity,
     // @User('id') currentId: number,
     // @User('username') username: string,

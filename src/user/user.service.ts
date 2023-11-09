@@ -22,13 +22,9 @@ export class UserService {
       where: { email: createUserDto.email },
     });
 
-    const userByUsername = await this.userRepository.findOne({
-      where: { username: createUserDto.username },
-    });
-
-    if (userByEmail || userByUsername) {
+    if (userByEmail) {
       throw new HttpException(
-        'Email or username is already registered',
+        'Email is already registered',
         HttpStatus.CONFLICT,
       );
     }
@@ -66,7 +62,7 @@ export class UserService {
       );
     }
 
-    delete userByEmail.password;
+    // delete userByEmail.password; - пароль ми видалили у функції buildUserResponse
 
     return userByEmail;
   }
@@ -87,6 +83,8 @@ export class UserService {
 
   // функція buildUserResponse формує та повертає відповідь для фронтенда у необхідному вигляді
   buildUserResponse(user: UserEntity): IUserResponse {
-    return { user: { ...user, token: this.generateJwt(user) } };
+    return {
+      user: { ...user, token: this.generateJwt(user), password: undefined }, // тут видаляємо пароль, щоб він не приходив на фронтенд
+    };
   }
 }
