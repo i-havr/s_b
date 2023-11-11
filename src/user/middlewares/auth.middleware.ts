@@ -4,7 +4,7 @@ import { verify, JwtPayload } from 'jsonwebtoken';
 import 'dotenv/config';
 
 import { UserService } from '@app/user/user.service';
-import { IExpressRequest } from '@app/types/expressRequest.interface';
+import { IExpressRequest } from '@app/types';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {

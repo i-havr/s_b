@@ -1,6 +1,8 @@
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { hash } from 'bcrypt';
 
+import { UserRoleType } from '@app/types';
+
 @Entity({ name: 'users' })
 export class UserEntity {
   @PrimaryGeneratedColumn()
@@ -17,6 +19,15 @@ export class UserEntity {
 
   @Column({ default: '' })
   image: string;
+
+  @Column('text', { array: true, default: ['none'] })
+  role: UserRoleType[];
+
+  @Column({ nullable: true, default: undefined })
+  kindergarten: number | undefined;
+
+  @Column('text', { array: true, default: [''] })
+  group: string[];
 
   @Column({ select: false })
   password: string;

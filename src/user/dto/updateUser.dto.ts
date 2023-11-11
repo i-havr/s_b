@@ -1,10 +1,11 @@
-import { IsEmail } from 'class-validator';
+import { UserRoleType } from '@app/types';
 
-export class CreateUserDto {
+export class UpdateUserDto {
   readonly username: string;
-
-  @IsEmail()
-  readonly email: string;
-
+  readonly bio: string;
+  readonly image: string;
+  readonly role: UserRoleType[];
+  readonly kindergarten: number;
+  readonly group: string[];
   readonly password: string;
 }
