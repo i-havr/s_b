@@ -1,7 +1,14 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  OneToMany,
+} from 'typeorm';
 import { hash } from 'bcrypt';
 
 import { UserRoleType } from '@app/types';
+import { ArticleEntity } from '@app/article/article.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -20,13 +27,19 @@ export class UserEntity {
   @Column({ default: '' })
   image: string;
 
-  @Column('text', { array: true, default: ['none'] })
+  // @Column({ type: 'text', array: true, default: ['none'] })
+  // role: UserRoleType[];
+
+  @Column({ type: 'simple-array', default: 'none' })
   role: UserRoleType[];
 
   @Column({ nullable: true, default: undefined })
   kindergarten: number | undefined;
 
-  @Column('text', { array: true, default: [''] })
+  // @Column({ type: 'text', array: true, default: [''] })
+  // group: string[];
+
+  @Column({ type: 'simple-array', default: '' })
   group: string[];
 
   @Column({ select: false })
@@ -36,4 +49,7 @@ export class UserEntity {
   async hashPassword() {
     this.password = await hash(this.password, 10);
   }
+
+  @OneToMany(() => ArticleEntity, (article) => article.author)
+  articles: ArticleEntity[];
 }
