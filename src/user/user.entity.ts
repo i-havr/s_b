@@ -4,11 +4,13 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { hash } from 'bcrypt';
 
 import { UserRoleType } from '@app/types';
 import { ArticleEntity } from '@app/article/article.entity';
+import { KindergartenEntity } from '@app/kindergarten/kindergarten.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -33,12 +35,11 @@ export class UserEntity {
   @Column({ type: 'simple-array', default: 'none' })
   role: UserRoleType[];
 
-  @Column({ nullable: true, default: undefined })
-  kindergarten: number | undefined;
+  // @Column({ nullable: true, default: undefined })
+  // kindergarten: number | undefined;
 
   // @Column({ type: 'text', array: true, default: [''] })
   // group: string[];
-
   @Column({ type: 'simple-array', default: '' })
   group: string[];
 
@@ -52,4 +53,7 @@ export class UserEntity {
 
   @OneToMany(() => ArticleEntity, (article) => article.author)
   articles: ArticleEntity[];
+
+  @ManyToOne(() => KindergartenEntity, (kindergarten) => kindergarten.users)
+  kindergarten: KindergartenEntity;
 }

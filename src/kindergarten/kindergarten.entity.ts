@@ -3,27 +3,24 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  ManyToOne,
+  OneToMany,
 } from 'typeorm';
 
 import { UserEntity } from '@app/user/user.entity';
 
-@Entity({ name: 'articles' })
-export class ArticleEntity {
+@Entity({ name: 'kindergartens' })
+export class KindergartenEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  slug: string;
-
-  @Column()
-  title: string;
+  name: string;
 
   @Column({ default: '' })
-  description: string;
+  fullName: string;
 
   @Column({ default: '' })
-  body: string;
+  additionalInfo: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
@@ -31,17 +28,15 @@ export class ArticleEntity {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
-  @Column('simple-array')
-  tagList: string[];
-
-  @Column({ default: 0 })
-  favoritesCount: number;
+  // add logic
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  allowedUntil: Date;
 
   @BeforeUpdate()
   updateTimestamp() {
     this.updatedAt = new Date();
   }
 
-  @ManyToOne(() => UserEntity, (user) => user.articles, { eager: true })
-  author: UserEntity;
+  @OneToMany(() => UserEntity, (user) => user.kindergarten)
+  users: UserEntity[];
 }

@@ -7,6 +7,7 @@ import { AppController } from '@app/app.controller';
 import { AppService } from '@app/app.service';
 
 import { UserModule } from '@app/user/user.module';
+import { KindergartenModule } from '@app/kindergarten/kindergarten.module';
 import { ArticleModule } from '@app/article/article.module';
 import { TagModule } from '@app/tag/tag.module';
 
@@ -18,6 +19,7 @@ import { AuthMiddleware, UpdateMiddleware } from '@app/user/middlewares';
     TagModule,
     UserModule,
     ArticleModule,
+    KindergartenModule,
   ],
   controllers: [AppController],
   providers: [AppService],
