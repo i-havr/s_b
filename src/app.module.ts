@@ -7,7 +7,7 @@ import { AppController } from '@app/app.controller';
 import { AppService } from '@app/app.service';
 
 import { UserModule } from '@app/user/user.module';
-import { ArticleModule } from './article/article.module';
+import { ArticleModule } from '@app/article/article.module';
 import { TagModule } from '@app/tag/tag.module';
 
 import { AuthMiddleware, UpdateMiddleware } from '@app/user/middlewares';
