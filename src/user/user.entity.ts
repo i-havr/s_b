@@ -19,10 +19,10 @@ export class UserEntity {
   email: string;
 
   @Column()
-  username: string;
+  name: string;
 
   @Column({ default: '' })
-  bio: string;
+  additionalInfo: string;
 
   @Column({ default: '' })
   image: string;

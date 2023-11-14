@@ -41,7 +41,7 @@ export class UserService {
   async login(loginUserDto: LoginUserDto): Promise<UserEntity> {
     const userByEmail = await this.userRepository.findOne({
       where: { email: loginUserDto.email },
-      select: ['id', 'username', 'email', 'bio', 'image', 'password'],
+      select: ['id', 'name', 'email', 'additionalInfo', 'image', 'password'],
     });
 
     if (!userByEmail) {
@@ -87,9 +87,9 @@ export class UserService {
 
   // функція generateJwt створює та повертає токен
   generateJwt(user: UserEntity): string {
-    const { id, username, email } = user;
+    const { id, name, email } = user;
 
-    return sign({ id, username, email }, process.env.JWT_SECRET);
+    return sign({ id, name, email }, process.env.JWT_SECRET);
   }
 
   // функція buildUserResponse формує та повертає відповідь для фронтенда у необхідному вигляді

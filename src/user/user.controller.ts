@@ -47,7 +47,7 @@ export class UserController {
     // @Req() request: IExpressRequest, <== можна було лишити так, але ми створили свій декоратор @User
     @User() user: UserEntity,
     // @User('id') currentId: number,
-    // @User('username') username: string,
+    // @User('name') name: string,
   ): Promise<IUserResponse> {
     return this.userService.buildUserResponse(user);
   }

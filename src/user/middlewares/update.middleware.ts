@@ -5,8 +5,8 @@ import { deleteNotAllowedProperties } from '@app/utils';
 import { IExpressRequest } from '@app/types';
 
 export const allowedPropertiesForUpdating = [
-  'username',
-  'bio',
+  'name',
+  'additionalInfo',
   'image',
   'role',
   'kindergarten',
