@@ -63,7 +63,7 @@ export class UserService {
       );
     }
 
-    // delete userByEmail.password; - пароль ми видалили у функції buildUserResponse
+    delete userByEmail.password; // пароль треба видалили тут чи у функції buildUserResponse ?????????
 
     return userByEmail;
   }
@@ -95,7 +95,7 @@ export class UserService {
   // функція buildUserResponse формує та повертає відповідь для фронтенда у необхідному вигляді
   buildUserResponse(user: UserEntity): IUserResponse {
     return {
-      user: { ...user, token: this.generateJwt(user), password: undefined }, // тут видаляємо пароль, щоб він не приходив на фронтенд
+      user: { ...user, token: this.generateJwt(user) }, // тут треба видалити пароль, щоб він не приходив на фронтенд
     };
   }
 }
