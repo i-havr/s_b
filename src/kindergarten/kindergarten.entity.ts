@@ -20,6 +20,15 @@ export class KindergartenEntity {
   fullName: string;
 
   @Column({ default: '' })
+  region: string;
+
+  @Column({ default: '' })
+  city: string;
+
+  @Column({ default: '' })
+  address: string;
+
+  @Column({ default: '' })
   additionalInfo: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

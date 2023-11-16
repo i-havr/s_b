@@ -11,7 +11,7 @@ import { KindergartenModule } from '@app/kindergarten/kindergarten.module';
 import { ArticleModule } from '@app/article/article.module';
 import { TagModule } from '@app/tag/tag.module';
 
-import { AuthMiddleware, UpdateMiddleware } from '@app/user/middlewares';
+import { AuthMiddleware } from '@app/user/middlewares';
 
 @Module({
   imports: [
@@ -28,8 +28,8 @@ export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(AuthMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL })
-      .apply(UpdateMiddleware)
-      .forRoutes({ path: 'user', method: RequestMethod.PUT });
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
+    // .apply(UpdateMiddleware)
+    // .forRoutes({ path: 'user', method: RequestMethod.PUT });
   }
 }
