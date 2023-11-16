@@ -5,6 +5,8 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   ManyToOne,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { hash } from 'bcrypt';
 
@@ -56,4 +58,8 @@ export class UserEntity {
 
   @ManyToOne(() => KindergartenEntity, (kindergarten) => kindergarten.users)
   kindergarten: KindergartenEntity;
+
+  @ManyToMany(() => ArticleEntity)
+  @JoinTable()
+  favorites: ArticleEntity[];
 }

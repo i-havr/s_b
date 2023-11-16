@@ -73,6 +73,34 @@ export class ArticleController {
     return this.articleService.buildArticleResponse(article);
   }
 
+  @Post(':slug/favorite')
+  @UseGuards(AuthGuard)
+  async addArticleToFavorites(
+    @User('id') currentUserId: number,
+    @Param('slug') slug: string,
+  ): Promise<IArticleResponse> {
+    const article = await this.articleService.addArticleToFavorites(
+      currentUserId,
+      slug,
+    );
+
+    return this.articleService.buildArticleResponse(article);
+  }
+
+  @Delete(':slug/favorite')
+  @UseGuards(AuthGuard)
+  async deleteArticleFromFavorites(
+    @User('id') currentUserId: number,
+    @Param('slug') slug: string,
+  ): Promise<IArticleResponse> {
+    const article = await this.articleService.deleteArticleFromFavorites(
+      currentUserId,
+      slug,
+    );
+
+    return this.articleService.buildArticleResponse(article);
+  }
+
   @Delete(':slug')
   @UseGuards(AuthGuard)
   async deleteArticle(
