@@ -29,8 +29,6 @@ export class ProfileService {
     }
 
     if (typeof currentUserId === 'number') {
-      console.log(currentUserId);
-
       const follow = await this.followRepository.findOne({
         where: {
           followerId: currentUserId,
